@@ -41,19 +41,19 @@
         endpoint: 'Dot',
         connector: ['Bezier'],
 
-        isTarget:'ture',
-        isSource:'ture'
+        isTarget:'ture',    //开头
+        isSource:'ture'     //结尾
 
       }
 
         jsPlumb.addEndpoint('item_left', {
 
-        },common)
+        },common)               //增加锚点
         jsPlumb.addEndpoint('item_bottom', {
-            anchors: ['Left','Right','Top','Bottom']
+            anchors: ['Left','Right','Top','Bottom']            //选择锚点添加位置
         },common)
         jsPlumb.importDefaults({
-            ConnectionsDetachable: false
+            ConnectionsDetachable: false                        //连线不允许更改
         })
         // 单点击了连接线,
         jsPlumb.bind('click', function (conn) {
@@ -65,12 +65,12 @@
         source: $(".item1"),
         target: $(".item2"),
         anchor: ['Left', 'Right'],
-        paintStyle: { stroke: 'lightgray', strokeWidth: 3 },
+        paintStyle: { stroke: 'lightgray', strokeWidth: 3 },                                //连线属性
         endpointStyle: { fill: 'lightgray', outlineStroke: 'darkgray', outlineWidth: 2 },
-        overlays: [ ['Arrow', { width: 12, length: 12, location: 0.5 }] ]
+        overlays: [ ['Arrow', { width: 12, length: 12, location: 0.5 }] ]                   //添加箭头
       }, common)
 
-        jsPlumb.draggable('item_left')
+        jsPlumb.draggable('item_left')          //draggable()方法设置目标可拖动
         jsPlumb.draggable('item_right')
         jsPlumb.draggable('item_bottom')
     })
