@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test3</title>
+    <script src="../js/jsplumb.min.js"></script>
+    <script src="jQuery.js"></script>
+    <style>
+        #item_left{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            position: absolute;
+        }
+        #item_right{
+            width: 100px;
+            height: 100px;
+            left: 400px;
+            border: 1px solid black;
+            position: absolute;
+        }
+        #item_bottom{
+            width: 100px;
+            height: 100px;
+            top: 400px;
+            border: 1px solid black;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="diagramContainer">
+    <div id="item_left" class="item1"></div>
+    <div id="item_right" class="item2"></div>
+    <div id="item_bottom" class="item3"></div>
+</div>
+<script>
+    /* global jsPlumb */
+    jsPlumb.ready(function () {
+      var common = {
+        endpoint: 'Dot',
+        connector: ['Bezier'],
+
+        isTarget:'ture',
+        isSource:'ture'
+
+      }
+
+        jsPlumb.addEndpoint('item_left', {
+
+        },common)
+        jsPlumb.addEndpoint('item_bottom', {
+            anchors: ['Left','Right','Top','Bottom']
+        },common)
+        jsPlumb.importDefaults({
+            ConnectionsDetachable: false
+        })
+        // 单点击了连接线,
+        jsPlumb.bind('click', function (conn) {
+            if (confirm('确定删除所点击的链接吗？')) {
+                jsPlumb.deleteConnection(conn)
+        }
+})
+      jsPlumb.connect({
+        source: $(".item1"),
+        target: $(".item2"),
+        anchor: ['Left', 'Right'],
+        paintStyle: { stroke: 'lightgray', strokeWidth: 3 },
+        endpointStyle: { fill: 'lightgray', outlineStroke: 'darkgray', outlineWidth: 2 },
+        overlays: [ ['Arrow', { width: 12, length: 12, location: 0.5 }] ]
+      }, common)
+
+        jsPlumb.draggable('item_left')
+        jsPlumb.draggable('item_right')
+        jsPlumb.draggable('item_bottom')
+    })
+  </script>
+</body>
+</html>
